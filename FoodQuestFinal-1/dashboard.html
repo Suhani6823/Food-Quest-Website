@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        body {background-color: #cff2d8;}
+
+    </style>
+    <title>Data Visualisation</title>
+  </head>
+  <body>
+    <div class = "col-8 offset-2">
+        <div class = "card text-center">
+            <div class = "card-body border-bottom"> 
+              <h2 class = "card-title text-start"> Dashboard</h2>
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-1 g-1">
+                <div class="col">
+                <div class="card">
+                    
+                    <div class="card-body">
+                    <h5 class="card-title">Inventory Turnover rate </h5>
+                    <canvas id="myChart1" width="600" height="200"></canvas>
+                    </div>
+                </div>
+                </div>
+            </div>
+                
+            <div class="row row-cols-1 row-cols-md-2 g-2">
+                <div class="col">
+                <div class="card">
+                    
+                    <div class="card-body">
+                    <h5 class="card-title">Waste percentage in ingredients</h5>
+                    <canvas id="pieChart" width="400" height="200"></canvas>
+                    
+                    </div>
+                </div>
+                </div>
+                <div class="col">
+                <div class="card">
+                    
+                    <div class="card-body">
+                    <h5 class="card-title"> Food Leftover</h5>
+                    <canvas id="myChart" width="600" height="300"></canvas>
+                    </div>
+                </div>
+                </div>
+            </div>
+      </div>
+    </div>
+   
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.js" integrity="sha512-zO8oeHCxetPn1Hd9PdDleg5Tw1bAaP0YmNvPY8CwcRyUk7d7/+nyElmFrB6f7vg4f7Fv4sui1mcep8RIEShczg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+      <script>
+            //set up
+            const data = {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 
+                        'June', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                        datasets: [{
+                        label: 'Percentage by month',
+                        data: [20, 18, 40, 36, 35, 42, 28, 16, 34, 30, 48, 28 ],
+                        // this dataset is drawn below
+                        borderColor: 'rgb(84, 219, 96)',
+                        backgroundColor: 'rgb(84, 219, 96,0.5)',
+                        order: 2
+                    }, {
+                        label: 'Benchmark',
+                        data: [35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35],
+                        type: 'line',
+                        // this dataset is drawn on top
+                        fill: false,
+                        borderColor: 'rgb(16, 82, 76)',
+                        order: 1
+                    }],
+
+            };
+            // config
+            const config1 = {
+                type: 'bar',
+                data,
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+
+                };
+
+            // render 
+            const myChart1 = new Chart(
+                document.getElementById('myChart1'),
+                config1
+            );
+
+            //setup doughnut
+            const datapie = {
+                labels: ['Not wasted', 'Wasted'], 
+                datasets: [{
+                    label: 'My First Dataset',
+                    data: [300, 150, ],
+                    backgroundColor: [
+                    'rgb(84, 219, 96)',
+                    'rgb(16, 82, 76)'
+                    
+                    ],
+                    hoverOffset: 4
+                }],
+
+            };
+            // configdoughnut
+            const config2 = {
+                type: 'doughnut',
+                data: datapie,
+                    options: {}
+
+
+                };
+
+            // render doughnut
+            const pieChart = new Chart(
+                document.getElementById('pieChart'),
+                config2
+            );
+
+        </script>
+
+        <script>
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Own', 'Industrial average'],
+                    datasets: [{
+                        label: 'percentage',
+                        data: [20,33, 0],
+                        backgroundColor: [
+                            'rgb(84, 219, 96,0.5)',
+                            'rgb(16, 82, 76, 0.5)'
+                            
+                        ],
+                        borderColor: [
+                            'rgb(84, 219, 96)',
+                            'rgb(16, 82, 76)'
+                            
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                           
+                        }
+                    }
+                }
+            });
+        </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+  </body>
+</html>
